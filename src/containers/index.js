@@ -13,7 +13,7 @@ const RootApp = connect(
 
         const state = store.getState()
 
-        return dispatch({ type: 'compute', val1: state.val1, val2: state.val2, selVal: state.selVal})
+        return dispatch({ type: 'compute'})
       },
       onInput1: (e) => {
         return dispatch({type: 'val1', val: e.target.value})

@@ -26,18 +26,20 @@
 // 	}
 // }
 import { combineReducers } from 'redux'
+import store from './store'
 
 const result = (state = 0, action) => {
 	switch(action.type){
 		case 'compute':
-			if(action.selVal == 0){
-				return state = action.val1+action.val2
-			}else if(action.selVal == 1){
-				return state = action.val1-action.val2
-			}else if(action.selVal == 2){
-				return state = action.val1*action.val2
-			}else if(action.selVal == 3){
-				return state = action.val1/action.val2
+			const _state = store.getState()
+			if(_state.selVal == 0){
+				return state = _state.val1+_state.val2
+			}else if(_state.selVal == 1){
+				return state = _state.val1-_state.val2
+			}else if(_state.selVal == 2){
+				return state = _state.val1*_state.val2
+			}else if(_state.selVal == 3){
+				return state = _state.val1/_state.val2
 			}
 			
 		default:
