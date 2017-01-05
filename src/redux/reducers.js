@@ -1,29 +1,77 @@
-const counter = (state = {result: 0, val1: 0, val2: 0, selVal: 0}, action) => {
-	console.log(state)
+// const counter = (state = {result: 0, val1: 0, val2: 0, selVal: 0}, action) => {
+// 	console.log(state)
+// 	switch(action.type){
+// 		case 'compute':
+// 			let obj = {val1: state.val1, val2: state.val2, selVal: state.selVal}
+// 			if(state.selVal == 0){
+// 				return {result: Number(state.val1)+Number(state.val2), ...obj}
+// 			}else if(state.selVal == 1){
+// 				return {result: Number(state.val1)-Number(state.val2), ...obj}
+// 			}else if(state.selVal == 2){
+// 				return {result: Number(state.val1)*Number(state.val2), ...obj}
+// 			}else if(state.selVal == 3){
+// 				return {result: Number(state.val1)/Number(state.val2), ...obj}
+// 			}
+// 		case 'input': 
+// 			state.val1 = action.val
+// 			return state
+// 		case 'input2': 
+// 			state.val2 = action.val
+// 			return state
+// 		case 'select': 
+// 			state.selVal = action.val
+// 			return state
+// 		default: 
+// 			return state
+// 	}
+// }
+import { combineReducers } from 'redux'
+
+const result = (state = 0, action) => {
 	switch(action.type){
 		case 'compute':
-			let obj = {val1: state.val1, val2: state.val2, selVal: state.selVal}
-			if(state.selVal == 0){
-				return {result: Number(state.val1)+Number(state.val2), ...obj}
-			}else if(state.selVal == 1){
-				return {result: Number(state.val1)-Number(state.val2), ...obj}
-			}else if(state.selVal == 2){
-				return {result: Number(state.val1)*Number(state.val2), ...obj}
-			}else if(state.selVal == 3){
-				return {result: Number(state.val1)/Number(state.val2), ...obj}
+			if(action.selVal == 0){
+				return state = action.val1+action.val2
+			}else if(action.selVal == 1){
+				return state = action.val1-action.val2
+			}else if(action.selVal == 2){
+				return state = action.val1*action.val2
+			}else if(action.selVal == 3){
+				return state = action.val1/action.val2
 			}
-		case 'input': 
-			state.val1 = action.val
+			
+		default:
 			return state
-		case 'input2': 
-			state.val2 = action.val
+	}
+}
+const val1 = (state = 0, action) => {
+	switch(action.type){
+		case 'val1':
+			return state = Number(action.val)
+		default:
 			return state
-		case 'select': 
-			state.selVal = action.val
+	}
+}
+const val2 = (state = 0, action) => {
+	switch(action.type){
+		case 'val2':
+			return state = Number(action.val)
+		default:
 			return state
-		default: 
+	}
+}
+const selVal = (state = 0, action) => {
+	switch(action.type){
+		case 'selVal':
+			return state = Number(action.val)
+		default:
 			return state
 	}
 }
 
-export default counter
+export default combineReducers({
+	result,
+	val1,
+	val2,
+	selVal
+})

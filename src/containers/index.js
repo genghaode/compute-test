@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Compute from '../components'
-
-const compute = { type: 'compute'}
-const input = { type: 'input'}
+import store from '../redux/store'
 const RootApp = connect(
   (state) => {
     return {
@@ -12,16 +10,19 @@ const RootApp = connect(
   }, (dispatch) => {
     return {
       onResult: () => {
-        return dispatch(compute)
+
+        const state = store.getState()
+
+        return dispatch({ type: 'compute', val1: state.val1, val2: state.val2, selVal: state.selVal})
       },
       onInput1: (e) => {
-        return dispatch({type: 'input', val: e.target.value})
+        return dispatch({type: 'val1', val: e.target.value})
       },
       onInput2: (e) => {
-        return dispatch({type: 'input2', val: e.target.value})
+        return dispatch({type: 'val2', val: e.target.value})
       },
       onSelect: (e) => {
-        return dispatch({type: 'select', val: e.target.value})
+        return dispatch({type: 'selVal', val: e.target.value})
       }    
     }
   }
